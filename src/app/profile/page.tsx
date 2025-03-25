@@ -1,9 +1,8 @@
 "use client";
 
-import { useDisconnect, useAccount } from "wagmi";
+import { useAccount } from "wagmi";
 
 export default function ProfilePage() {
-  const { disconnect } = useDisconnect();
   const account = useAccount();
   return (
     <div>
@@ -16,12 +15,6 @@ export default function ProfilePage() {
         <br />
         chainId: {account.chainId}
       </div>
-
-      {account.status === "connected" && (
-        <button type="button" onClick={() => disconnect()}>
-          Disconnect
-        </button>
-      )}
     </div>
   );
 }

@@ -28,7 +28,6 @@ export default function useRead() {
     eventName: "Decremented",
     address: wagmiContractConfig.address as `0x${string}`,
     onLogs: () => {
-      console.log(balance);
       refetch();
     },
   });

@@ -1,0 +1,50 @@
+.navbar {
+  padding: calc(var(--spacing-ref) * 2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar img {
+  border-radius: 50%;
+}
+
+.navbar button {
+  background-color: var(--background-color-button);
+  border: none;
+  width: var(--input-width);
+  height: var(--input-height);
+  border-radius: var(--radius-ref);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--text-font);
+}
+
+.navbar button:hover {
+  background-color: var(--background-color-button-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.navbar button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(0);
+  transition: transform 0.3s ease;
+  border-radius: var(--radius-ref);
+}
+
+.navbar button:hover::after {
+  transform: scale(1);
+}
