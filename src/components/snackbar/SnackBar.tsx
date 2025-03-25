@@ -11,7 +11,7 @@ export default function SnackBar({ isOpen, message, onClose }: SnackBarProps) {
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       open={isOpen}
       message={message}
-      autoHideDuration={1000}
+      autoHideDuration={4000}
       onClose={handleClose}
     />
   );

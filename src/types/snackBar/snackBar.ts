@@ -1,5 +1,5 @@
 export type SnackBarProps = {
   isOpen: boolean;
-  message: string;
+  message: string | undefined;
   onClose?: () => void;
 };
