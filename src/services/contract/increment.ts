@@ -1,0 +1,22 @@
+import { useWriteContract } from "wagmi";
+import { wagmiContractConfig } from "./contractConfig";
+
+export const Increment = () => {
+  const { writeContract, isSuccess, isError } = useWriteContract();
+  const handleIncrement = () => {
+    writeContract({
+      ...wagmiContractConfig,
+      functionName: "increment",
+      address: wagmiContractConfig.address as `0x${string}`,
+    });
+  };
+  const handleIncrementMore = (value: bigint) => {
+    writeContract({
+      ...wagmiContractConfig,
+      functionName: "incrementBy",
+      address: wagmiContractConfig.address as `0x${string}`,
+      args: [value],
+    });
+  };
+  return { handleIncrement, handleIncrementMore, isSuccess, isError };
+};

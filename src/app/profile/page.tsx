@@ -1,3 +1,5 @@
+"use client";
+
 import { useDisconnect, useAccount } from "wagmi";
 
 export default function ProfilePage() {
