@@ -1,5 +1,6 @@
 import Decrement from "@/services/contract/decrement";
 import { useState } from "react";
+import { StyledButton } from "../style/styledbutton";
 
 export default function DecrementButton() {
   const { handleDecrement, handleDecrementMore } = Decrement();
@@ -7,31 +8,31 @@ export default function DecrementButton() {
   const [value, setValue] = useState<bigint>(BigInt(0));
   return (
     <div className="button-container">
-      <button type="button" onClick={handleDecrement}>
+      <StyledButton type="button" onClick={handleDecrement}>
         Remove 1 coin
-      </button>
-      <button
+      </StyledButton>
+      <StyledButton
         type="button"
         onClick={() => {
           setIsRemoveMore(!isRemoveMore);
         }}
       >
         Remove more coin
-      </button>
+      </StyledButton>
       {isRemoveMore && (
         <div>
           <input
             type="number"
             onChange={(e) => setValue(BigInt(e.target.value))}
           />{" "}
-          <button
+          <StyledButton
             type="button"
             onClick={() => {
               handleDecrementMore(value);
             }}
           >
             Remove coins
-          </button>
+          </StyledButton>
         </div>
       )}
     </div>

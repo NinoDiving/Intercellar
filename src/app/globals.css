@@ -25,6 +25,8 @@
   --background-color-modal: #282828;
   --background-color-button: #383838;
   --background-color-button-hover: #484848;
+  --background-scrollbar: #585858;
+  --color-scrollbar: #383838;
   --text-color: rgba(255, 255, 255, 0.87);
   --title-font: "Satoshi-Black";
   --text-font: "Switzer-Regular";
@@ -43,10 +45,17 @@
 body {
   margin: 0;
   padding: 0;
+  width: 100vw;
   box-sizing: border-box;
   background-color: var(--background-color);
   color: var(--text-color);
-  height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--title-font);
 }
 
 p,

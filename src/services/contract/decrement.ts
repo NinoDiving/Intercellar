@@ -3,7 +3,6 @@ import { wagmiContractConfig } from "./contractConfig";
 
 export default function Decrement() {
   const { writeContract, isError, isSuccess } = useWriteContract();
-
   const handleDecrement = () => {
     writeContract({
       ...wagmiContractConfig,
@@ -19,5 +18,11 @@ export default function Decrement() {
       args: [value],
     });
   };
-  return { handleDecrement, handleDecrementMore, isError, isSuccess };
+
+  return {
+    handleDecrement,
+    handleDecrementMore,
+    isError,
+    isSuccess,
+  };
 }

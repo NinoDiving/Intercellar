@@ -1,10 +1,11 @@
 import { useRouter } from "next/navigation";
-import ModalConnectWallet from "../modal/modal";
+import ModalConnectWallet from "../modal/modalWallet";
 import { useAccount, useDisconnect } from "wagmi";
 import Link from "next/link";
 import Image from "next/image";
 import Vitalik from "../../public/images/Vitalik_Buterin.jpg";
 import "./navbar.css";
+import { StyledButton } from "../style/styledbutton";
 export default function Navbar() {
   const router = useRouter();
   const { disconnect } = useDisconnect();
@@ -16,9 +17,9 @@ export default function Navbar() {
           <Link href="/profile">
             <Image src={Vitalik} alt="Profile" width={80} height={80} />
           </Link>
-          <button type="button" onClick={() => disconnect()}>
+          <StyledButton type="button" onClick={() => disconnect()}>
             Disconnect
-          </button>
+          </StyledButton>
         </nav>
       ) : (
         <ModalConnectWallet />

@@ -1,0 +1,56 @@
+.modal-wallet {
+  justify-self: end;
+
+  & button {
+    font-size: calc(var(--font-size) * 0.9);
+  }
+}
+
+#connect-title {
+  font-family: var(--text-font);
+  letter-spacing: px;
+  font-size: clamp(
+    calc(var(--font-size) * 0.7),
+    1rem,
+    calc(var(--font-size) * 1.5)
+  );
+}
+
+.modal-container {
+  text-align: center;
+}
+
+#connect-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wallet-button {
+  & button {
+    font-size: calc(var(--font-size) * 0.9);
+    width: 10rem;
+    height: 7rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  & img {
+    margin: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #connect-button {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    & .MetaMask {
+      justify-self: end;
+    }
+
+    & .error {
+      grid-column: span 2;
+    }
+  }
+}

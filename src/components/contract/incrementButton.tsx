@@ -1,6 +1,7 @@
 import { Increment } from "@/services/contract/increment";
 import { useState, useEffect } from "react";
 import SnackBar from "../snackbar/SnackBar";
+import { StyledButton } from "../style/styledbutton";
 
 export default function IncrementButton() {
   const [isSendMore, setIsSendMore] = useState<boolean>(false);
@@ -26,12 +27,12 @@ export default function IncrementButton() {
         message={isError ? error?.message : "Transaction réussie !"}
         onClose={handleClose}
       />
-      <button type="button" onClick={handleIncrement}>
+      <StyledButton type="button" onClick={handleIncrement}>
         Send 1 coin
-      </button>
-      <button type="button" onClick={() => setIsSendMore(!isSendMore)}>
+      </StyledButton>
+      <StyledButton type="button" onClick={() => setIsSendMore(!isSendMore)}>
         Send more coins
-      </button>
+      </StyledButton>
 
       {isSendMore && (
         <div>
@@ -39,9 +40,12 @@ export default function IncrementButton() {
             type="number"
             onChange={(e) => setValue(BigInt(e.target.value))}
           />{" "}
-          <button type="button" onClick={() => handleIncrementMore(value)}>
+          <StyledButton
+            type="button"
+            onClick={() => handleIncrementMore(value)}
+          >
             Send coins
-          </button>
+          </StyledButton>
         </div>
       )}
     </div>

@@ -1,7 +1,8 @@
-import { useReadContract, useWatchContractEvent } from "wagmi";
+import { useBlockNumber, useReadContract } from "wagmi";
 import { wagmiContractConfig } from "./contractConfig";
 
 export default function useRead() {
+  const { data: blockNumber } = useBlockNumber({ watch: true });
   const {
     data: balance,
     error,
@@ -14,22 +15,9 @@ export default function useRead() {
     address: wagmiContractConfig.address as `0x${string}`,
   });
 
-  useWatchContractEvent({
-    ...wagmiContractConfig,
-    eventName: "Incremented",
-    address: wagmiContractConfig.address as `0x${string}`,
-    onLogs: () => {
-      refetch();
-    },
-  });
+  if (blockNumber) {
+    refetch();
+  }
 
-  useWatchContractEvent({
-    ...wagmiContractConfig,
-    eventName: "Decremented",
-    address: wagmiContractConfig.address as `0x${string}`,
-    onLogs: () => {
-      refetch();
-    },
-  });
   return { balance, error, isLoading, isError };
 }
