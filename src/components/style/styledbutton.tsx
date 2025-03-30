@@ -2,21 +2,22 @@ import { Button, styled } from "@mui/material";
 
 export const StyledButton = styled(Button)({
   backgroundColor: "var(--background-color-button)",
-  border: "none",
   margin: "var(--spacing-ref)",
   width: "calc(var(--input-width) * 2)",
   height: "calc(var(--input-height) * 2)",
-  borderRadius: "var(--radius-ref)",
+  borderRadius: "calc(var(--radius-ref) * 5)",
   letterSpacing: "1px",
   fontSize: "calc(var(--font-size) * 1.2)",
   color: "var(--text-color)",
-  boxShadow: "0px 0px 4px 0 rgba(247, 244, 244, 0.87)",
+  border: "1px solid #662c91",
   cursor: "pointer",
   transition: "all 0.3s ease",
   fontFamily: "var(--text-font)",
 
   "&:hover": {
     backgroundColor: "var(--background-color-button-hover)",
+    border: "1px solid #f0edee",
+    color: "black",
     transform: "translateY(-3px)",
   },
 
@@ -36,11 +37,11 @@ export const StyledButton = styled(Button)({
     top: 0,
     left: 0,
     width: "100%",
+    borderRadius: "calc(var(--radius-ref) * 5)",
     height: "100%",
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     transform: "scale(0)",
-    transition: "transform 0.3s ease",
-    borderRadius: "var(--radius-ref)",
+    transition: "transform 0.4s ease",
   },
 
   "&:hover::after": {

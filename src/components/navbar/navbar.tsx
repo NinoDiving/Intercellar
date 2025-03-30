@@ -1,13 +1,12 @@
-import { useRouter } from "next/navigation";
 import ModalConnectWallet from "../modal/modalWallet";
 import { useAccount, useDisconnect } from "wagmi";
 import Link from "next/link";
 import Image from "next/image";
-import Vitalik from "../../public/images/Vitalik_Buterin.jpg";
+import Vitalik from "../../../public/images/Vitalik_Buterin.jpg";
 import "./navbar.css";
 import { StyledButton } from "../style/styledbutton";
+
 export default function Navbar() {
-  const router = useRouter();
   const { disconnect } = useDisconnect();
   const account = useAccount();
   return (

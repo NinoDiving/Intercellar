@@ -1,17 +1,18 @@
 "use client";
 
 import ReadContract from "@/components/contract/readContract";
-import InteractionButtonContract from "@/components/contract/interactionButtonContract";
+import InteractionButtonContract from "@/components/contract/interactionContract/interactionButtonContract";
 import Navbar from "@/components/navbar/navbar";
-import WatchEvent from "@/components/contract/watchEvent";
-
+import WatchEvent from "@/components/contract/watchEventContract/watchEvent";
+import Footer from "@/components/footer/footer";
 function App() {
   return (
     <main>
       <Navbar />
       <ReadContract />
-      <WatchEvent />
       <InteractionButtonContract />
+      <WatchEvent />
+      <Footer />
     </main>
   );
 }

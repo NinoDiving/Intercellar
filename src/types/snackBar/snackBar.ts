@@ -1,5 +1,7 @@
 export type SnackBarProps = {
-  isOpen: boolean;
-  message: string | undefined;
-  onClose?: () => void;
+  isSuccess: boolean;
+  isError: boolean;
+  message: string;
+  severity: "success" | "error" | "info" | "warning";
+  error: string;
 };

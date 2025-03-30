@@ -1,11 +1,15 @@
-import Decrement from "@/services/contract/decrement";
-import { useState } from "react";
-import { StyledButton } from "../style/styledbutton";
-
-export default function DecrementButton() {
-  const { handleDecrement, handleDecrementMore } = Decrement();
-  const [isRemoveMore, setIsRemoveMore] = useState<boolean>(false);
-  const [value, setValue] = useState<bigint>(BigInt(0));
+import { SendHorizontal } from "lucide-react";
+import { StyledButton } from "../../style/styledbutton";
+import { DecrementButtonProps } from "@/types/button/buttonProps";
+import { TextField } from "@mui/material";
+export default function DecrementButton({
+  handleDecrement,
+  handleDecrementMore,
+  value,
+  setValue,
+  isRemoveMore,
+  setIsRemoveMore,
+}: DecrementButtonProps) {
   return (
     <div className="button-container">
       <StyledButton type="button" onClick={handleDecrement}>
@@ -17,11 +21,13 @@ export default function DecrementButton() {
           setIsRemoveMore(!isRemoveMore);
         }}
       >
-        Remove more coin
+        Remove more coins
       </StyledButton>
       {isRemoveMore && (
-        <div>
-          <input
+        <div className="send-more-container">
+          <TextField
+            label="How many coins ?"
+            variant="filled"
             type="number"
             onChange={(e) => setValue(BigInt(e.target.value))}
           />{" "}
@@ -31,7 +37,7 @@ export default function DecrementButton() {
               handleDecrementMore(value);
             }}
           >
-            Remove coins
+            <SendHorizontal />
           </StyledButton>
         </div>
       )}

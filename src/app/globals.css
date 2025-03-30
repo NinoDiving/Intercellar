@@ -1,9 +1,9 @@
 @font-face {
   font-family: "Satoshi-Black";
   src:
-    url("../../src/public/fonts/Satoshi-Black.woff2") format("woff2"),
-    url("../../src/public/fonts/Satoshi-Black.woff") format("woff"),
-    url("../../src/public/fonts/Satoshi-Black.ttf") format("truetype");
+    url("/fonts/Satoshi-Black.woff2") format("woff2"),
+    url("/fonts/Satoshi-Black.woff") format("woff"),
+    url("/fonts/Satoshi-Black.ttf") format("truetype");
   font-weight: 900;
   font-display: swap;
   font-style: normal;
@@ -12,22 +12,22 @@
 @font-face {
   font-family: "Switzer-Regular";
   src:
-    url("../../src/public/fonts/Switzer-Regular.woff2") format("woff2"),
-    url("../../src/public/fonts/Switzer-Regular.woff") format("woff"),
-    url("../../src/public/fonts/Switzer-Regular.ttf") format("truetype");
+    url("/fonts/Switzer-Regular.woff2") format("woff2"),
+    url("/fonts/Switzer-Regular.woff") format("woff"),
+    url("/fonts/Switzer-Regular.ttf") format("truetype");
   font-weight: 400;
   font-display: swap;
   font-style: normal;
 }
 
 :root {
-  --background-color: #181818;
+  --background-color: #242424;
   --background-color-modal: #282828;
   --background-color-button: #383838;
   --background-color-button-hover: #484848;
   --background-scrollbar: #585858;
   --color-scrollbar: #383838;
-  --text-color: rgba(255, 255, 255, 0.87);
+  --text-color: #f0edee;
   --title-font: "Satoshi-Black";
   --text-font: "Switzer-Regular";
   --font-size: 1rem;
@@ -43,6 +43,7 @@
 }
 
 body {
+  scroll-behavior: smooth;
   margin: 0;
   padding: 0;
   width: 100vw;

@@ -1,6 +1,7 @@
 import useWatchEvent from "@/services/contract/watchEvent";
 import "./watchEvent.css";
 import { formatGwei } from "viem";
+
 export default function WatchEvent() {
   const { events } = useWatchEvent();
 
@@ -13,19 +14,15 @@ export default function WatchEvent() {
         <div className="events-list">
           {events.map((event) => (
             <div key={event.id} className="event-item">
-              <p>Hash: {event.transactionHash}</p>
               <p>Method: {event.type}</p>
+              <p>Hash: {event.transactionHash}</p>
               <p>Block: {event.blockNumber.toString()}</p>
-              <p>Valeur: {event.value.toString()} coins</p>
               <p>Date: {new Date(event.timestamp).toLocaleDateString()}</p>
               <p>Time: {new Date(event.timestamp).toLocaleTimeString()}</p>
               <p>From: {event.sender}</p>
               <p>To: {event.address}</p>
               <p>
-                Gas fee:{" "}
-                {event.gasPrice
-                  ? parseFloat(formatGwei(event.gasPrice)).toFixed(2)
-                  : "N/A"}{" "}
+                Gas fee: {event.gasPrice ? formatGwei(event.gasPrice) : "none"}{" "}
                 Gwei
               </p>
             </div>

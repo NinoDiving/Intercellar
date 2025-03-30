@@ -1,7 +1,7 @@
 import { useWriteContract } from "wagmi";
 import { wagmiContractConfig } from "./contractConfig";
 
-export const Increment = () => {
+export default function Increment() {
   const { writeContract, isSuccess, isError, error } = useWriteContract();
   const handleIncrement = () => {
     writeContract({
@@ -19,4 +19,4 @@ export const Increment = () => {
     });
   };
   return { handleIncrement, handleIncrementMore, isSuccess, isError, error };
-};
+}

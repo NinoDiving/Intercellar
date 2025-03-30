@@ -4,22 +4,11 @@ import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import { useConnect } from "wagmi";
 import "./modalWallet.css";
-import MetaMask from "../../public/images/metamask.png";
-import Brave from "../../public/images/brave.png";
+import MetaMask from "../../../public/images/metamask.png";
+import Brave from "../../../public/images/brave.png";
 import Image from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import { StyledButton } from "../style/styledbutton";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "clamp(20rem, 50vw, 50vw)",
-  bgcolor: "var(--background-color-modal)",
-  borderRadius: "var(--radius-ref)",
-  boxShadow: 24,
-  p: 4,
-};
 
 const walletImages: Record<string, StaticImport | string> = {
   MetaMask: MetaMask,
@@ -41,31 +30,30 @@ export default function ModalConnectWallet() {
         aria-labelledby="Connect your wallet"
         aria-describedby="button to connect your wallet"
       >
-        <Box sx={style}>
+        <Box className="modal-box">
           <Typography id="connect-title" variant="h6" component="h2">
             Connect your wallet
           </Typography>
           <Typography id="connect-button" sx={{ mt: 2 }}>
             {connectors.map((connector) => (
-              <div className="wallet-button" key={connector.id}>
-                <StyledButton
-                  className={connector.name}
-                  onClick={() => connect({ connector })}
-                  type="button"
-                  disabled={status === "pending"}
-                >
-                  {walletImages[connector.name] && (
-                    <Image
-                      src={walletImages[connector.name]}
-                      alt={connector.name}
-                      className="wallet-icon"
-                      width={30}
-                      height={30}
-                    />
-                  )}
-                  <span className="wallet-name">{connector.name}</span>
-                </StyledButton>
-              </div>
+              <StyledButton
+                key={connector.id}
+                className={connector.name}
+                onClick={() => connect({ connector })}
+                type="button"
+                disabled={status === "pending"}
+              >
+                {walletImages[connector.name] && (
+                  <Image
+                    src={walletImages[connector.name]}
+                    alt={connector.name}
+                    className="wallet-icon"
+                    width={30}
+                    height={30}
+                  />
+                )}
+                <span className="wallet-name">{connector.name}</span>
+              </StyledButton>
             ))}
             {error && <div className="error">{error?.message}</div>}
           </Typography>

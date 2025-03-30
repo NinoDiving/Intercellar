@@ -1,19 +1,7 @@
 import { wagmiContractConfig } from "@/services/contract/contractConfig";
+import { ContractEvent } from "@/types/contract/contract";
 import { useState, useEffect } from "react";
 import { useBlockNumber, usePublicClient } from "wagmi";
-
-export type ContractEvent = {
-  type: string;
-  value: bigint;
-  timestamp: number;
-  transactionHash: string;
-  address: `0x${string}`;
-  sender: `0x${string}`;
-  gasPrice?: bigint;
-  valueTransaction: bigint;
-  blockNumber: bigint;
-  id: string;
-};
 
 export default function useWatchEvent() {
   const [events, setEvents] = useState<ContractEvent[]>([]);
@@ -22,8 +10,7 @@ export default function useWatchEvent() {
   const publicClient = usePublicClient();
 
   useEffect(() => {
-    if (!blockNumber || !publicClient) return;
-
+    if (!publicClient) return;
     const checkEvents = async () => {
       try {
         const incrementedLogs = await publicClient.getLogs({
@@ -33,8 +20,8 @@ export default function useWatchEvent() {
             name: "Incremented",
             inputs: [{ type: "uint256", name: "value", indexed: false }],
           },
-          fromBlock: blockNumber - BigInt(5),
-          toBlock: blockNumber,
+          fromBlock: BigInt(0),
+          toBlock: "latest",
         });
 
         const incrementedByLogs = await publicClient.getLogs({
@@ -44,8 +31,8 @@ export default function useWatchEvent() {
             name: "IncrementedBy",
             inputs: [{ type: "uint256", name: "value", indexed: false }],
           },
-          fromBlock: blockNumber - BigInt(5),
-          toBlock: blockNumber,
+          fromBlock: BigInt(0),
+          toBlock: "latest",
         });
 
         const decrementedLogs = await publicClient.getLogs({
@@ -55,8 +42,8 @@ export default function useWatchEvent() {
             name: "Decremented",
             inputs: [{ type: "uint256", name: "value", indexed: false }],
           },
-          fromBlock: blockNumber - BigInt(5),
-          toBlock: blockNumber,
+          fromBlock: BigInt(0),
+          toBlock: "latest",
         });
 
         const decrementedByLogs = await publicClient.getLogs({
@@ -66,8 +53,19 @@ export default function useWatchEvent() {
             name: "DecrementedBy",
             inputs: [{ type: "uint256", name: "value", indexed: false }],
           },
-          fromBlock: blockNumber - BigInt(5),
-          toBlock: blockNumber,
+          fromBlock: BigInt(0),
+          toBlock: "latest",
+        });
+
+        const resetLogs = await publicClient.getLogs({
+          address: wagmiContractConfig.address as `0x${string}`,
+          event: {
+            type: "event",
+            name: "Reseted",
+            inputs: [],
+          },
+          fromBlock: BigInt(0),
+          toBlock: "latest",
         });
 
         const allLogs = [
@@ -77,6 +75,7 @@ export default function useWatchEvent() {
           ...decrementedByLogs.map((log) => ({
             type: "Decrementation By",
             log,
+            ...resetLogs.map((log) => ({ type: "Reset", log })),
           })),
         ];
 
@@ -84,39 +83,51 @@ export default function useWatchEvent() {
           const transaction = await publicClient.getTransaction({
             hash: allLogs[0].log.transactionHash,
           });
-          const newEvents = allLogs.map((item) => ({
-            type: item.type,
-            value: item.log.args.value as bigint,
-            timestamp: Date.now(),
-            transactionHash: item.log.transactionHash,
-            id: `${item.log.transactionHash}-${item.log.logIndex}`,
-            blockNumber: item.log.blockNumber,
-            address: item.log.address,
-            sender: transaction.from,
-            gasPrice: transaction.gasPrice,
-            valueTransaction: transaction.value,
-          }));
+
+          const newEvents = await Promise.all(
+            allLogs.map(async (item) => {
+              const block = await publicClient.getBlock({
+                blockNumber: item.log.blockNumber,
+              });
+
+              return {
+                type: item.type,
+                value: item.log.args.value as bigint,
+                timestamp: Number(block.timestamp) * 1000,
+                transactionHash: item.log.transactionHash,
+                id: `${item.log.transactionHash}-${item.log.logIndex}`,
+                blockNumber: item.log.blockNumber,
+                address: item.log.address,
+                sender: transaction.from,
+                gasPrice: transaction.gasPrice,
+                valueTransaction: transaction.value,
+              };
+            })
+          );
 
           setEvents((prev) => {
             const existingIds = new Set(prev.map((e) => e.id));
             const uniqueNewEvents = newEvents.filter(
-              (e) => !existingIds.has(e.id)
+              (e): e is ContractEvent =>
+                e !== undefined && !existingIds.has(e.id)
             );
 
-            console.log("Ajout de nouveaux événements:", uniqueNewEvents);
-
             if (uniqueNewEvents.length === 0) return prev;
-            return [...prev, ...uniqueNewEvents];
+
+            // Combiner les anciens et nouveaux événements
+            const allEvents = [...prev, ...uniqueNewEvents];
+
+            // Trier par timestamp décroissant (du plus récent au plus ancien)
+            return allEvents.sort((a, b) => b.timestamp - a.timestamp);
           });
         }
       } catch (error) {
         console.error("Erreur lors de la vérification des événements:", error);
       }
     };
-    console.log(events);
 
     checkEvents();
   }, [blockNumber, publicClient]);
 
-  return { events, blockNumber };
+  return { events };
 }

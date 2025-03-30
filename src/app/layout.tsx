@@ -13,6 +13,9 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Intercellar Test",
   description: "Test for Intercellar",
+  icons: {
+    icon: "/images/Logo.ico",
+  },
 };
 
 export default function RootLayout(props: { children: ReactNode }) {
