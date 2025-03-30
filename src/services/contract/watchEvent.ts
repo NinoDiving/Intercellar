@@ -7,6 +7,11 @@ export type ContractEvent = {
   value: bigint;
   timestamp: number;
   transactionHash: string;
+  address: `0x${string}`;
+  sender: `0x${string}`;
+  gasPrice?: bigint;
+  valueTransaction: bigint;
+  blockNumber: bigint;
   id: string;
 };
 
@@ -18,8 +23,6 @@ export default function useWatchEvent() {
 
   useEffect(() => {
     if (!blockNumber || !publicClient) return;
-
-    console.log(`Vérification des événements pour le bloc ${blockNumber}`);
 
     const checkEvents = async () => {
       try {
@@ -77,15 +80,21 @@ export default function useWatchEvent() {
           })),
         ];
 
-        console.log(`Logs trouvés pour le bloc ${blockNumber}:`, allLogs);
-
         if (allLogs.length > 0) {
+          const transaction = await publicClient.getTransaction({
+            hash: allLogs[0].log.transactionHash,
+          });
           const newEvents = allLogs.map((item) => ({
             type: item.type,
             value: item.log.args.value as bigint,
             timestamp: Date.now(),
             transactionHash: item.log.transactionHash,
             id: `${item.log.transactionHash}-${item.log.logIndex}`,
+            blockNumber: item.log.blockNumber,
+            address: item.log.address,
+            sender: transaction.from,
+            gasPrice: transaction.gasPrice,
+            valueTransaction: transaction.value,
           }));
 
           setEvents((prev) => {
@@ -104,13 +113,10 @@ export default function useWatchEvent() {
         console.error("Erreur lors de la vérification des événements:", error);
       }
     };
+    console.log(events);
 
     checkEvents();
   }, [blockNumber, publicClient]);
 
-  useEffect(() => {
-    console.log("État actuel des événements:", events);
-  }, [events]);
-
-  return { events };
+  return { events, blockNumber };
 }

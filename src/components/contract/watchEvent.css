@@ -49,9 +49,8 @@
   padding: var(--spacing-ref);
   border-radius: var(--radius-ref);
   box-shadow: 0px 0px 4px 0 rgba(255, 254, 254, 0.3);
+}
 
-  & p:nth-child(4) {
-    width: 40ch;
-    overflow-wrap: break-word;
-  }
+.event-item p {
+  overflow-wrap: break-word;
 }
