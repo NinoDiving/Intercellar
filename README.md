@@ -33,7 +33,7 @@ Smart Contract Intercellar est une application web développée avec **Next.js**
 ### Étapes d'installation
 1. Cloner le dépôt :
    ```bash
-   git clone https://github.com/ton-utilisateur/smart-contract-intercellar.git
+   git clone git@github.com:NinoDiving/Intercellar.git
    ```
 2. Se rendre dans le dossier du projet :
    ```bash
@@ -51,19 +51,9 @@ Smart Contract Intercellar est une application web développée avec **Next.js**
 ## Tests
 Lancer les tests Jest et React Testing Library :
 ```bash
-npm run test
+npm test
 ```
 
-## Déploiement
-Construire l'application pour la production :
-```bash
-npm run build
-```
-
-Lancer en mode production :
-```bash
-npm start
-```
 
 ---
 
