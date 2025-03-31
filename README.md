@@ -21,7 +21,7 @@ Smart Contract Intercellar est une application web développée avec **Next.js**
 - **Page Account** :
   - Informations sur l'utilisateur
   - Détails du wallet
-- **Application responsive** pour une expérience optimale sur tous les appareils
+- **Application responsive et accessible** pour une expérience optimale sur tous les appareils, navigation possible au clavier
 - **Tests d'intégration** pour garantir le bon fonctionnement des interactions
 
 ## Installation
