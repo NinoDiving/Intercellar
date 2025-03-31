@@ -75,8 +75,8 @@ export default function useWatchEvent() {
           ...decrementedByLogs.map((log) => ({
             type: "Decrementation By",
             log,
-            ...resetLogs.map((log) => ({ type: "Reset", log })),
           })),
+          ...resetLogs.map((log) => ({ type: "Reset", log })),
         ];
 
         if (allLogs.length > 0) {
@@ -92,7 +92,6 @@ export default function useWatchEvent() {
 
               return {
                 type: item.type,
-                value: item.log.args.value as bigint,
                 timestamp: Number(block.timestamp) * 1000,
                 transactionHash: item.log.transactionHash,
                 id: `${item.log.transactionHash}-${item.log.logIndex}`,
@@ -114,10 +113,8 @@ export default function useWatchEvent() {
 
             if (uniqueNewEvents.length === 0) return prev;
 
-            // Combiner les anciens et nouveaux événements
             const allEvents = [...prev, ...uniqueNewEvents];
 
-            // Trier par timestamp décroissant (du plus récent au plus ancien)
             return allEvents.sort((a, b) => b.timestamp - a.timestamp);
           });
         }

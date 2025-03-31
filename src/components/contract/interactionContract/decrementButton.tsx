@@ -2,6 +2,7 @@ import { SendHorizontal } from "lucide-react";
 import { StyledButton } from "../../style/styledbutton";
 import { DecrementButtonProps } from "@/types/button/buttonProps";
 import { TextField } from "@mui/material";
+import useRead from "@/services/contract/read";
 export default function DecrementButton({
   handleDecrement,
   handleDecrementMore,
@@ -10,6 +11,10 @@ export default function DecrementButton({
   isRemoveMore,
   setIsRemoveMore,
 }: DecrementButtonProps) {
+  const { balance } = useRead();
+
+  const disabled = !balance || value > BigInt(balance.toString());
+
   return (
     <div className="button-container">
       <StyledButton type="button" onClick={handleDecrement}>
@@ -32,6 +37,7 @@ export default function DecrementButton({
             onChange={(e) => setValue(BigInt(e.target.value))}
           />{" "}
           <StyledButton
+            disabled={disabled}
             type="button"
             onClick={() => {
               handleDecrementMore(value);
