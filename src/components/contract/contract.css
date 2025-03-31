@@ -25,13 +25,15 @@
   text-shadow: 4px 0px 0px #662c91;
 }
 
-.contract-container div {
-  border-radius: var(--radius-ref);
-  box-shadow: inset 0px 0px 4px 1px #662c91;
-  padding: calc(var(--spacing-ref) * 2);
-  background-color: var(--background-color-modal);
-  text-align: center;
-  width: clamp(5rem, 80vw, 80vw);
+.contract-container {
+  & .contract-content {
+    border-radius: var(--radius-ref);
+    box-shadow: inset 0px 0px 4px 1px #662c91;
+    padding: calc(var(--spacing-ref) * 2);
+    background-color: var(--background-color-modal);
+    text-align: center;
+    width: clamp(5rem, 80vw, 80vw);
+  }
 }
 .contract-container p {
   padding: var(--spacing-ref);
@@ -69,22 +71,6 @@
 .button-container {
   display: flex;
   flex-direction: column;
-}
-
-footer {
-  background-color: #37055ec5;
-  text-align: center;
-  height: calc(var(--spacing-ref) * 8);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  & a {
-    text-decoration: none;
-    font-size: calc(var(--font-size) * 1.2);
-    font-family: var(--text-font);
-    color: var(--text-color);
-  }
 }
 
 @media screen and (min-width: 768px) {

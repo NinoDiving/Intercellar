@@ -8,7 +8,7 @@ export default function ReadContract() {
   return (
     <article className="contract-container">
       <h1>Smart Contract</h1>
-      <div>
+      <div className="contract-content">
         <p>Contract address: {wagmiContractConfig.address}</p>
         {isLoading ? (
           <p>Loading...</p>

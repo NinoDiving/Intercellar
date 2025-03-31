@@ -1,20 +1,7 @@
 "use client";
 
-import { useAccount } from "wagmi";
+import Profile from "@/components/user/profile";
 
 export default function ProfilePage() {
-  const account = useAccount();
-  return (
-    <div>
-      <h2>Account</h2>
-
-      <div>
-        status: {account.status}
-        <br />
-        addresses: {JSON.stringify(account.addresses)}
-        <br />
-        chainId: {account.chainId}
-      </div>
-    </div>
-  );
+  return <Profile />;
 }

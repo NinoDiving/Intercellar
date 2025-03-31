@@ -1,0 +1,54 @@
+.profile {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & h1 {
+    text-align: center;
+    font-size: clamp(calc(var(--font-size) * 4), 10vw, 10rem);
+  }
+
+  & h2 {
+    width: 20ch;
+  }
+
+  & p {
+    width: 30ch;
+    overflow-wrap: break-word;
+  }
+
+  & span {
+    animation: text-color 10s infinite;
+  }
+}
+
+.link-home {
+  padding-top: calc(var(--spacing-ref) * 2);
+  padding-left: calc(var(--spacing-ref) * 2);
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+@keyframes text-color {
+  0% {
+    color: #4a90e2; /* Bleu clair */
+  }
+  20% {
+    color: #50e3c2; /* Turquoise */
+  }
+  40% {
+    color: #b8e986; /* Vert clair */
+  }
+  60% {
+    color: #f5a623; /* Orange */
+  }
+  80% {
+    color: #e74c3c; /* Rouge */
+  }
+  100% {
+    color: #4a90e2; /* Retour au bleu pour une transition fluide */
+  }
+}

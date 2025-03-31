@@ -14,7 +14,7 @@ export default function ResetButton() {
       <SnackBars
         isSuccess={isSuccess}
         isError={isError}
-        message={isSuccess ? "Opération réussie !" : ""}
+        message={isSuccess ? "Reset success !" : ""}
         error={error?.message || ""}
         severity={isError ? "error" : "success"}
       />

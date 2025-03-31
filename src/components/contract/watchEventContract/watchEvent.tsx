@@ -14,16 +14,26 @@ export default function WatchEvent() {
         <div className="events-list">
           {events.map((event) => (
             <div key={event.id} className="event-item">
-              <p>Method: {event.type}</p>
-              <p>Hash: {event.transactionHash}</p>
-              <p>Block: {event.blockNumber.toString()}</p>
-              <p>Date: {new Date(event.timestamp).toLocaleDateString()}</p>
-              <p>Time: {new Date(event.timestamp).toLocaleTimeString()}</p>
-              <p>From: {event.sender}</p>
-              <p>To: {event.address}</p>
+              <h3>Method: {event.type}</h3>
+              <div className="info-date">
+                <p>{new Date(event.timestamp).toLocaleDateString()}</p>
+                <p>{new Date(event.timestamp).toLocaleTimeString()}</p>
+                <p>
+                  <span>Block:</span> {event.blockNumber.toString()}
+                </p>
+              </div>
               <p>
-                Gas fee: {event.gasPrice ? formatGwei(event.gasPrice) : "none"}{" "}
-                Gwei
+                <span>Hash:</span> {event.transactionHash}
+              </p>
+              <p>
+                <span>From:</span> {event.sender}
+              </p>
+              <p>
+                <span>To:</span> {event.address}
+              </p>
+              <p>
+                <span> Gas fee:</span>{" "}
+                {event.gasPrice ? formatGwei(event.gasPrice) : "none"} Gwei
               </p>
             </div>
           ))}

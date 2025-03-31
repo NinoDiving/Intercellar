@@ -13,7 +13,6 @@ export default function SnackBars({
 }: SnackBarProps) {
   const [open, setOpen] = useState(false);
 
-  // Ouvrir le Snackbar quand isSuccess ou isError change
   useEffect(() => {
     if (isSuccess || isError) {
       setOpen(true);
@@ -36,7 +35,7 @@ export default function SnackBars({
       open={open}
       autoHideDuration={4000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <Alert
         className="toast-alert"
