@@ -1,7 +1,7 @@
 # Smart Contract Intercellar
 
 ## Description
-Smart Contract Intercellar est une application web développée avec **Next.js**, **WAGMI**, **TypeScript** et **CSS**. Elle permet d'interagir avec un Smart Contract en temps réel en se connectant via un wallet comme **Brave** ou **MetaMask**.
+Smart Contract Intercellar est un test technique web, développé avec **Next.js**, **WAGMI**, **TypeScript** et **CSS**. Elle permet d'interagir avec un Smart Contract en temps réel en se connectant via un wallet comme **Brave** ou **MetaMask**.
 
 ## Technologies utilisées
 - **Next.js** - Framework React performant pour le web
